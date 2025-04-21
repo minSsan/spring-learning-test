@@ -51,10 +51,12 @@ public class UpdatingDAO {
      */
     public Long insertWithKeyHolder(Customer customer) {
         String sql = "insert into customers (first_name, last_name) values (?, ?)";
+        // KeyHolder - JDBC insert 쿼리를 실행한 후 반환되는 값을 가져올 수 있음
         KeyHolder keyHolder = new GeneratedKeyHolder();
 
         //todo : keyHolder에 대해 학습하고, Customer를 저장후 저장된 Customer의 id를 반환하기
         jdbcTemplate.update(connection -> {
+            // 두 번째 파라미터(= columnNames) : 작업에 영향을 받은 row 혹은 row들에 대해서 어떤 필드 값을 리턴할 것인지 지정
             PreparedStatement preparedStatement = connection.prepareStatement(sql, new String[]{"id"});
             preparedStatement.setString(1, customer.getFirstName());
             preparedStatement.setString(2, customer.getLastName());
