@@ -24,4 +24,9 @@ public class ProductController {
 
         return ResponseEntity.ok().build();
     }
+
+    @ExceptionHandler(IllegalArgumentException.class)
+    public ResponseEntity<String> handleException(IllegalArgumentException e) {
+        return ResponseEntity.badRequest().body(e.getMessage());
+    }
 }
