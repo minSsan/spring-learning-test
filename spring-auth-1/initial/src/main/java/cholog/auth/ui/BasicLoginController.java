@@ -31,8 +31,9 @@ public class BasicLoginController {
     @GetMapping("/members/me/basic")
     public ResponseEntity<MemberResponse> findMyInfo(HttpServletRequest request) {
         // TODO: authorization 헤더의 Basic 값에 있는 email과 password 추출 (hint: authorizationExtractor 사용)
-        String email = "";
-        String password = "";
+        AuthInfo extracted = authorizationExtractor.extract(request);
+        String email = extracted.getEmail();
+        String password = extracted.getPassword();
 
         if (authService.checkInvalidLogin(email, password)) {
             throw new AuthorizationException();
