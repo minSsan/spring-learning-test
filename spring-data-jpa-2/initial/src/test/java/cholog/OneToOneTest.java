@@ -31,6 +31,7 @@ public class OneToOneTest {
         entityManager.flush();
         entityManager.clear();
 
+        // 마찬가지로 author가 관계의 주인이므로, author 조회시 연관된 person에 대한 join 쿼리가 실행된다.
         Author persistAuthor = entityManager.find(Author.class, author.getId());
         assertThat(persistAuthor).isNotNull();
         assertThat(persistAuthor.getPerson()).isNotNull();
