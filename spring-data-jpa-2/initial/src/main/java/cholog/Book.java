@@ -12,6 +12,10 @@ public class Book {
     private String name;
     @ManyToOne
     private Publisher publisher;
+    @OneToMany(mappedBy = "book")
+    private Set<BookAuthor> authors;
+//    @ManyToMany
+//    private Set<Author> authors;
 
     public Book() {
 
@@ -34,7 +38,7 @@ public class Book {
         return publisher;
     }
 
-    public Set<Author> getAuthors() {
-        return null;
+    public Set<BookAuthor> getAuthors() {
+        return authors;
     }
 }
