@@ -7,7 +7,8 @@ public class Author {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @OneToOne
+    // 단방향에서는 LAZY 로딩이 먹히는데, 양방향에서 Person 조회 시에는 안 먹히는 이유?
+    @OneToOne(fetch = FetchType.LAZY)
     private Person person;
 
     public Author(Person person) {
